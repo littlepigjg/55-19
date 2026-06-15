@@ -1,0 +1,167 @@
+{
+    "library_name": "默认图书馆",
+    "severity_weights": {
+        "critical": 100,
+        "error": 50,
+        "warning": 10
+    },
+    "fields": {
+        "title": {
+            "label": "书名",
+            "rules": [
+                {
+                    "name": "required",
+                    "severity": "error",
+                    "message": "书名为必填字段",
+                    "suggestion": "请输入书籍名称"
+                },
+                {
+                    "name": "max_length",
+                    "params": {"max": 200},
+                    "severity": "warning",
+                    "message": "书名过长",
+                    "suggestion": "建议书名不超过200个字符"
+                }
+            ]
+        },
+        "author": {
+            "label": "作者",
+            "rules": [
+                {
+                    "name": "required",
+                    "severity": "error",
+                    "message": "作者为必填字段",
+                    "suggestion": "请输入作者姓名"
+                }
+            ]
+        },
+        "publisher": {
+            "label": "出版社",
+            "rules": [
+                {
+                    "name": "optional",
+                    "severity": "warning",
+                    "message": "建议填写出版社信息",
+                    "suggestion": "补充出版社可以提升元数据完整性"
+                }
+            ]
+        },
+        "publish_date": {
+            "label": "出版日期",
+            "rules": [
+                {
+                    "name": "optional",
+                    "severity": "warning",
+                    "message": "建议填写出版日期",
+                    "suggestion": "格式应为 YYYY-MM-DD，如 2023-01-15"
+                },
+                {
+                    "name": "date_format",
+                    "severity": "error",
+                    "message": "日期格式不正确",
+                    "suggestion": "请使用 YYYY-MM-DD 格式，如 2023-01-15"
+                }
+            ]
+        },
+        "isbn": {
+            "label": "ISBN",
+            "rules": [
+                {
+                    "name": "optional",
+                    "severity": "warning",
+                    "message": "建议填写ISBN",
+                    "suggestion": "ISBN有助于书籍识别和联网搜索"
+                },
+                {
+                    "name": "isbn13",
+                    "severity": "error",
+                    "message": "ISBN-13格式不正确",
+                    "suggestion": "ISBN-13应为13位数字且校验位正确，可使用在线ISBN校验工具验证"
+                }
+            ]
+        },
+        "language": {
+            "label": "语言",
+            "rules": [
+                {
+                    "name": "optional",
+                    "severity": "warning",
+                    "message": "建议填写语言代码",
+                    "suggestion": "使用ISO 639-1代码，如 zh 表示中文，en 表示英文"
+                },
+                {
+                    "name": "language_code",
+                    "severity": "error",
+                    "message": "语言代码不规范",
+                    "suggestion": "请使用ISO 639-1标准代码，如 zh、en、ja"
+                }
+            ]
+        },
+        "description": {
+            "label": "简介",
+            "rules": [
+                {
+                    "name": "optional",
+                    "severity": "warning",
+                    "message": "建议填写书籍简介",
+                    "suggestion": "简介有助于读者了解书籍内容"
+                },
+                {
+                    "name": "max_length",
+                    "params": {"max": 5000},
+                    "severity": "warning",
+                    "message": "简介过长",
+                    "suggestion": "建议简介不超过5000个字符"
+                }
+            ]
+        },
+        "classification": {
+            "label": "分类号",
+            "enabled": false,
+            "rules": [
+                {
+                    "name": "required",
+                    "severity": "error",
+                    "message": "分类号为必填字段",
+                    "suggestion": "请填写图书分类号，如 I247.5"
+                }
+            ]
+        },
+        "call_number": {
+            "label": "索书号",
+            "enabled": false,
+            "rules": [
+                {
+                    "name": "required",
+                    "severity": "error",
+                    "message": "索书号为必填字段",
+                    "suggestion": "请填写索书号，如 I247.5/123"
+                }
+            ]
+        },
+        "email": {
+            "label": "联系邮箱",
+            "enabled": false,
+            "rules": [
+                {
+                    "name": "email",
+                    "severity": "error",
+                    "message": "邮箱格式不正确",
+                    "suggestion": "请输入有效的邮箱地址，如 example@library.com"
+                }
+            ]
+        },
+        "website": {
+            "label": "相关网站",
+            "enabled": false,
+            "rules": [
+                {
+                    "name": "url",
+                    "severity": "error",
+                    "message": "URL格式不正确",
+                    "suggestion": "请输入有效的URL，如 https://example.com/book/123"
+                }
+            ]
+        }
+    }
+}

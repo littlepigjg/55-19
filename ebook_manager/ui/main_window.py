@@ -20,6 +20,7 @@ from .book_table import BookTableWidget
 from .edit_panel import MetadataEditPanel
 from .search_dialog import OnlineSearchDialog
 from .convert_dialog import ConvertDialog
+from .validation_dialog import ValidationReportDialog
 from .workers import ScanWorker, ParseWorker
 
 
@@ -143,6 +144,10 @@ class MainWindow(QMainWindow):
         convert_action = QAction("格式转换(&C)...", self)
         convert_action.triggered.connect(lambda: self._on_convert_requested(self.book_table.get_selected_books()))
         tool_menu.addAction(convert_action)
+
+        validate_action = QAction("🔍 批量验证元数据(&V)...", self)
+        validate_action.triggered.connect(self._on_batch_validate)
+        tool_menu.addAction(validate_action)
 
         calibre_status = QAction("Calibre 状态检查", self)
         calibre_status.triggered.connect(self._check_calibre)
@@ -270,6 +275,14 @@ class MainWindow(QMainWindow):
                 "请从 https://calibre-ebook.com 下载安装，\n"
                 "并确保 ebook-convert 在系统 PATH 中。"
             )
+
+    def _on_batch_validate(self):
+        if not self._books:
+            QMessageBox.information(self, "提示", "书库为空，请先扫描或导入电子书")
+            return
+
+        dialog = ValidationReportDialog(self._books, self)
+        dialog.exec()
 
     def _show_about(self):
         QMessageBox.about(
